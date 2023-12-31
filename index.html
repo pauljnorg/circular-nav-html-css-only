@@ -8,86 +8,86 @@
 </head>
 <body>
     <!-- Menu container with a CSS variable for the number of items -->
-    <div class="menu" style="--n: 8;"> 
+    <div class="menu" style="--n: 8;">
         <!-- Toggle button for the menu -->
         <div class="toggle"><ion-icon name="home-outline"></ion-icon></div>
         
-        <!-- Menu items (li) with a CSS variable for their index -->
-        <!-- Note: Ideally, li elements should be inside a ul or ol -->
-        <li style="--i:0;">
-            <a href="#"><ion-icon name="thermometer-outline"></ion-icon></a>
-        </li>
-        <div class="toggle"><ion-icon name="home-outline"></ion-icon></div>
-        <li style="--i:1;">
-           <a href="#"><ion-icon name="calendar-outline"></ion-icon></a>
-        </li>
-        <li style="--i:2;">
-           <a href="#"><ion-icon name="videocam-outline"></ion-icon></a>
-        </li>
-        <li style="--i:3;">
-           <a href="#"><ion-icon name="finger-print-outline"></ion-icon></a>
-        </li>
-        <!-- Example of an external link in one of the menu items -->
-        <li style="--i:4;">
-            <a href="https://google.com" target="_blank" rel="noopener">
-                <ion-icon name="wifi-outline"></ion-icon>
-            </a>
-        </li>
-        <li style="--i:5;">
-           <a href="#"><ion-icon name="globe-outline"></ion-icon></a>
-        </li>
-        <li style="--i:6;">
-           <a href="#"><ion-icon name="key-outline"></ion-icon></a>
-        </li>
-        <li style="--i:7;">
-           <a href="#"><ion-icon name="settings-outline"></ion-icon></a>
-        </li>
-        <!-- ...other li elements... -->
-    </div>
+            <!-- Menu items (li) with a CSS variable for their index -->
+            <!-- Note: Ideally, li elements should be inside a ul or ol -->
+            <li style="--i:0;">
+                <a href="#"><ion-icon name="thermometer-outline"></ion-icon></a>
+            </li>
+            <li style="--i:1;">
+                <a href="#"><ion-icon name="calendar-outline"></ion-icon></a>
+            </li>
+            <li style="--i:2;">
+                <a href="#"><ion-icon name="videocam-outline"></ion-icon></a>
+            </li>
+            <li style="--i:3;">
+                <a href="#"><ion-icon name="finger-print-outline"></ion-icon></a>
+            </li>
+            <!-- Example of an external link in one of the menu items -->
+            <li style="--i:4;">
+                <a href="https://google.com" target="_blank" rel="noopener"><ion-icon name="wifi-outline"></ion-icon></a>
+            </li>
+            <li style="--i:5;">
+                <a href="#"><ion-icon name="globe-outline"></ion-icon></a>
+            </li>
+            <li style="--i:6;">
+                <a href="#"><ion-icon name="key-outline"></ion-icon></a>
+            </li>
+            <li style="--i:7;">
+                <a href="#"><ion-icon name="settings-outline"></ion-icon></a>
+            </li>
+            <!-- ...other li elements... -->
+        </div>
 
-    <!-- Loading Ionicons icon library -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <!-- Loading Ionicons icon library -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Inline JavaScript for the menu functionality -->
-    <script>
-        // Selecting the toggle and menu elements
-        let toggle = document.querySelector('.toggle');
-        let menu = document.querySelector('.menu');
+        <!-- Inline JavaScript for the menu functionality -->
+        <script> 
+            // Selecting the toggle and menu elements
+            let toggle = document.querySelector('.toggle');
+            let menu = document.querySelector('.menu');
 
-        // Event listener for click on the toggle button
-        toggle.onclick = function(){
-           menu.classList.toggle('active'); // Toggle 'active' class on the menu
-           applyTransform(); // Call the function to apply transformations to li elements
-        }
+            // Event listener for click on the toggle button
+            toggle.onclick = function(){
+               menu.classList.toggle('active') // Toggle 'active' class on the menu
+               applyTransform();// Call the function to apply transformations to li elements
+            }
 
-        // Select all li elements within the menu
-        const listItems = document.querySelectorAll('.menu li');
+            // Select all li elements within the menu
+            const listItems = document.querySelectorAll('.menu li');
 
-        // Function to apply transformation to each li element
-        function applyTransform() {
-            const radius = 75; // Radius for positioning the li elements in a circle
-            const isActive = menu.classList.contains('active'); // Check if the menu is active
+            // Function to apply transformation to each li element
+            function applyTransform() {
+               const radius = 75; // Radius for positioning the li elements in a circle
+               const isActive = menu.classList.contains('active'); // Check if the menu is active
 
-            // Loop through each li element
-            listItems.forEach((li, index) => {
-                if (isActive) {
-                    // If the menu is active, position li elements in a circular layout
-                    const angle = 360 / listItems.length * index; // Calculate the angle for each item
-                    const radians = angle * Math.PI / 180; // Convert angle to radians for x, y calculation
-                    
+                // Loop through each li element
+               listItems.forEach((li, index) => {
+                  if (isActive) {
+                     // Calculate the angle (for example, for a circular layout)
+                     const angle = 360 / listItems.length * index; // Calculate the angle for each item
+                     const radians = angle * Math.PI / 180; // Convert angle to radians for x, y calculation
+                     
                     // Calculate x and y position based on the angle
                     const x = Math.cos(radians) * radius;
                     const y = Math.sin(radians) * radius;
-                    
+                     
+                     // Apply the transform
+                     li.style.transform = `translate(${x}px, ${y -20}px)`;
+
+
                     // Apply the transformation to position the li element
-                    li.style.transform = `translate(${x}px, ${y - 20}px)`;
-                } else {
-                    // If the menu is not active, reset the transformation
-                    li.style.transform = 'translate(-50%, -50%) scale(0)';
-                }
-            });
-        }
-    </script>
+                  } else {
+                     // If not active, reverse the transformation
+                     li.style.transform = 'translate(-50%, -50%) scale(0)';
+                  }
+               });
+            }
+        </script>
 </body>
 </html>
