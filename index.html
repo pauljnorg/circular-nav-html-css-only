@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <div class="menu">
+        <div class="menu" style="--n: 8;">
         <div class="toggle"><ion-icon name="home-outline"></ion-icon></div>
         <li style="--i:0;">
            <a href="#"><ion-icon name="thermometer-outline"></ion-icon></a>
@@ -21,7 +21,7 @@
            <a href="#"><ion-icon name="finger-print-outline"></ion-icon></a>
         </li>
         <li style="--i:4;">
-           <a href="#"><ion-icon name="wifi-outline"></ion-icon></a>
+           <a href="https://google.com" target="_blank" rel="noopener"><ion-icon name="wifi-outline"></ion-icon></a>
         </li>
         <li style="--i:5;">
            <a href="#"><ion-icon name="globe-outline"></ion-icon></a>
@@ -36,11 +36,46 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script>
-         let toggle = document.querySelector('.toggle');
-         let menu = document.querySelector('.menu');
-         toggle.onclick = function(){
-             menu.classList.toggle('active')
-         }
+            let toggle = document.querySelector('.toggle');
+            let menu = document.querySelector('.menu');
+            toggle.onclick = function(){
+               menu.classList.toggle('active') 
+               // Call the function to apply transform
+               applyTransform();
+            }
+            // Select all li elements
+            const listItems = document.querySelectorAll('.menu li');
+
+            // Function to apply transformation
+            function applyTransform() {
+
+               // Function to apply or reverse transformation
+
+               const radius = 75; // Radius of the circle
+               const isActive = menu.classList.contains('active');
+
+               listItems.forEach((li, index) => {
+                  if (isActive) {
+                     // Calculate the angle (for example, for a circular layout)
+                     const angle = 360 / listItems.length * index;
+                     const radians = angle * Math.PI / 180; // Convert angle to radians
+                     
+                     // Calculate x and y position
+                     const x = Math.cos(radians) * radius;
+                     const y = Math.sin(radians) * radius;
+                     
+                     // Apply the transform
+                     li.style.transform = `translate(${x}px, ${y -20}px)`;
+
+                     //transform: translate(-50%, -50%) rotate(var(--angle)) translate(300px) rotate(-var(--angle)) scale(1); 
+
+                     // You can modify the transform property to achieve the desired effect
+                  } else {
+                     // If not active, reverse the transformation
+                     li.style.transform = 'translate(-50%, -50%) scale(0)';
+                  }
+               });
+            }
         </script>
 </body>
 </html>
